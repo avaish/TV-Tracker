@@ -7,15 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0C195E031D00F65453 /* LoginViewController.swift */; };
+		45782A0F195F68A400F65453 /* ShowListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0E195F68A400F65453 /* ShowListTableViewController.swift */; };
 		45E0DC48195DED80008DBAF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC47195DED80008DBAF7 /* AppDelegate.swift */; };
 		45E0DC4B195DED80008DBAF7 /* TV_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC49195DED80008DBAF7 /* TV_Tracker.xcdatamodeld */; };
-		45E0DC4D195DED80008DBAF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC4C195DED80008DBAF7 /* ViewController.swift */; };
 		45E0DC50195DED80008DBAF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E0DC4E195DED80008DBAF7 /* Main.storyboard */; };
 		45E0DC52195DED80008DBAF7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45E0DC51195DED80008DBAF7 /* Images.xcassets */; };
 		45E0DC5E195DED80008DBAF7 /* TV_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC5D195DED80008DBAF7 /* TV_TrackerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		45782A15195F744500F65453 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E0DC3A195DED80008DBAF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45E0DC41195DED80008DBAF7;
+			remoteInfo = "TV Tracker";
+		};
+		45782A17195F744500F65453 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E0DC3A195DED80008DBAF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45E0DC41195DED80008DBAF7;
+			remoteInfo = "TV Tracker";
+		};
 		45E0DC58195DED80008DBAF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45E0DC3A195DED80008DBAF7 /* Project object */;
@@ -26,11 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45782A0C195E031D00F65453 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		45782A0E195F68A400F65453 /* ShowListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowListTableViewController.swift; sourceTree = "<group>"; };
 		45E0DC42195DED80008DBAF7 /* TV Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E0DC46195DED80008DBAF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E0DC47195DED80008DBAF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45E0DC4A195DED80008DBAF7 /* TV_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TV_Tracker.xcdatamodel; sourceTree = "<group>"; };
-		45E0DC4C195DED80008DBAF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		45E0DC4F195DED80008DBAF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45E0DC51195DED80008DBAF7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45E0DC57195DED80008DBAF7 /* TV TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TV TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,8 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				45E0DC47195DED80008DBAF7 /* AppDelegate.swift */,
-				45E0DC4C195DED80008DBAF7 /* ViewController.swift */,
+				45782A0C195E031D00F65453 /* LoginViewController.swift */,
 				45E0DC4E195DED80008DBAF7 /* Main.storyboard */,
+				45782A0E195F68A400F65453 /* ShowListTableViewController.swift */,
 				45E0DC51195DED80008DBAF7 /* Images.xcassets */,
 				45E0DC49195DED80008DBAF7 /* TV_Tracker.xcdatamodeld */,
 				45E0DC45195DED80008DBAF7 /* Supporting Files */,
@@ -144,6 +161,8 @@
 			);
 			dependencies = (
 				45E0DC59195DED80008DBAF7 /* PBXTargetDependency */,
+				45782A16195F744500F65453 /* PBXTargetDependency */,
+				45782A18195F744500F65453 /* PBXTargetDependency */,
 			);
 			name = "TV TrackerTests";
 			productName = "TV TrackerTests";
@@ -161,6 +180,12 @@
 				TargetAttributes = {
 					45E0DC41195DED80008DBAF7 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = WFA83R9TQA;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					45E0DC56195DED80008DBAF7 = {
 						CreatedOnToolsVersion = 6.0;
@@ -211,7 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E0DC4D195DED80008DBAF7 /* ViewController.swift in Sources */,
+				45782A0F195F68A400F65453 /* ShowListTableViewController.swift in Sources */,
+				45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */,
 				45E0DC4B195DED80008DBAF7 /* TV_Tracker.xcdatamodeld in Sources */,
 				45E0DC48195DED80008DBAF7 /* AppDelegate.swift in Sources */,
 			);
@@ -228,6 +254,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		45782A16195F744500F65453 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45E0DC41195DED80008DBAF7 /* TV Tracker */;
+			targetProxy = 45782A15195F744500F65453 /* PBXContainerItemProxy */;
+		};
+		45782A18195F744500F65453 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45E0DC41195DED80008DBAF7 /* TV Tracker */;
+			targetProxy = 45782A17195F744500F65453 /* PBXContainerItemProxy */;
+		};
 		45E0DC59195DED80008DBAF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45E0DC41195DED80008DBAF7 /* TV Tracker */;
@@ -331,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "TV Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -342,6 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "TV Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,6 +441,7 @@
 				45E0DC63195DED80008DBAF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45E0DC64195DED80008DBAF7 /* Build configuration list for PBXNativeTarget "TV TrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +450,7 @@
 				45E0DC66195DED80008DBAF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
