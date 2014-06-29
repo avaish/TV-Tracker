@@ -1,13 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6162" systemVersion="14A238h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dfK-dt-T8q">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6160"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="p7f-qE-0li">
+            <objects>
+                <tabBarController id="dfK-dt-T8q" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Lpk-vn-M9j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="KJK-xH-Vyp" kind="relationship" relationship="viewControllers" id="tWQ-EH-72U"/>
+                        <segue destination="iTO-jq-Sch" kind="presentation" identifier="Login" modalPresentationStyle="formSheet" id="ZmL-di-4CP"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aEh-pk-mv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1210.5" y="132"/>
+        </scene>
+        <!--Show List Table View Controller - Root View Controller-->
+        <scene sceneID="cQe-FA-gqc">
+            <objects>
+                <tableViewController id="Ses-a3-WVe" customClass="ShowListTableViewController" customModule="TV_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6dy-oJ-ct0">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" id="cdS-xT-TMQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cdS-xT-TMQ" id="e2v-RE-gUm">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <variation key="heightClass=regular" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="640"/>
+                        </variation>
+                        <connections>
+                            <outlet property="dataSource" destination="Ses-a3-WVe" id="mcJ-4F-sSr"/>
+                            <outlet property="delegate" destination="Ses-a3-WVe" id="25V-gs-OEU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="7kz-61-XBA"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8p-NK-lrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="382.5" y="132"/>
+        </scene>
+        <!--Navigation Controller - Item-->
+        <scene sceneID="YZH-Zr-JkE">
+            <objects>
+                <navigationController id="KJK-xH-Vyp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="OtI-iB-CmA"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rBp-4d-aJw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ses-a3-WVe" kind="relationship" relationship="rootViewController" id="pH6-Kd-Kht"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nOg-4S-OUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-427.5" y="132"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lw9-V4-zhN">
+            <objects>
+                <navigationController id="iTO-jq-Sch" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Twq-UL-Rq6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="8px-l7-Wgo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TYI-yP-qC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-427.5" y="700.5"/>
+        </scene>
+        <!--Login View Controller - Connect Trakt Account-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="TV_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +104,135 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tj-RW-f0R">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="prepareSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTc-h2-zG3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyp-Qm-jfQ">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="AbJ-Ap-MEe">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="Wgy-yP-Ecw"/>
+                                </constraints>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Wgy-yP-Ecw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Wgy-yP-Ecw"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FH2-Sg-LaF">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trakt Logo" translatesAutoresizingMaskIntoConstraints="NO" id="w8A-Y4-ZFW">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="KWe-6h-Eoa"/>
+                                    <constraint firstAttribute="width" constant="92" id="Qr1-ba-oor">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KWe-6h-Eoa"/>
+                                        <exclude reference="Qr1-ba-oor"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="KWe-6h-Eoa"/>
+                                        <include reference="Qr1-ba-oor"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98775050951086951" green="0.97492984771235502" blue="0.96474345446840748" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AbJ-Ap-MEe" secondAttribute="trailing" constant="23" id="7Ca-bk-GDc"/>
+                            <constraint firstItem="w8A-Y4-ZFW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DRf-wr-FgV"/>
+                            <constraint firstAttribute="trailing" secondItem="Xyp-Qm-jfQ" secondAttribute="trailing" constant="20" symbolic="YES" id="GRo-GC-cXS"/>
+                            <constraint firstItem="w8A-Y4-ZFW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="U5Z-ke-W9C"/>
+                            <constraint firstAttribute="bottom" secondItem="6Tj-RW-f0R" secondAttribute="bottom" constant="20" symbolic="YES" id="WSe-aX-7hr"/>
+                            <constraint firstItem="6Tj-RW-f0R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="dzA-rB-1KM"/>
+                            <constraint firstItem="Xyp-Qm-jfQ" firstAttribute="baseline" secondItem="6Tj-RW-f0R" secondAttribute="baseline" id="iXz-YV-eYI"/>
+                            <constraint firstItem="AbJ-Ap-MEe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="tnz-YS-3la"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AbJ-Ap-MEe" secondAttribute="bottom" constant="91" id="yJG-Px-6O7"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="6Tj-RW-f0R"/>
+                                <exclude reference="Xyp-Qm-jfQ"/>
+                                <exclude reference="AbJ-Ap-MEe"/>
+                                <exclude reference="FH2-Sg-LaF"/>
+                                <exclude reference="w8A-Y4-ZFW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="7Ca-bk-GDc"/>
+                                <exclude reference="tnz-YS-3la"/>
+                                <exclude reference="yJG-Px-6O7"/>
+                                <exclude reference="WSe-aX-7hr"/>
+                                <exclude reference="dzA-rB-1KM"/>
+                                <exclude reference="GRo-GC-cXS"/>
+                                <exclude reference="iXz-YV-eYI"/>
+                                <exclude reference="DRf-wr-FgV"/>
+                                <exclude reference="U5Z-ke-W9C"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="6Tj-RW-f0R"/>
+                                <include reference="Xyp-Qm-jfQ"/>
+                                <include reference="AbJ-Ap-MEe"/>
+                                <include reference="FH2-Sg-LaF"/>
+                                <include reference="w8A-Y4-ZFW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="7Ca-bk-GDc"/>
+                                <include reference="tnz-YS-3la"/>
+                                <include reference="yJG-Px-6O7"/>
+                                <include reference="WSe-aX-7hr"/>
+                                <include reference="dzA-rB-1KM"/>
+                                <include reference="GRo-GC-cXS"/>
+                                <include reference="iXz-YV-eYI"/>
+                                <include reference="DRf-wr-FgV"/>
+                                <include reference="U5Z-ke-W9C"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Connect Trakt Account" id="Hz2-sh-RFM"/>
+                    <connections>
+                        <outlet property="infoLabel" destination="AbJ-Ap-MEe" id="8Yj-Qu-ukY"/>
+                        <outlet property="logo" destination="w8A-Y4-ZFW" id="3eQ-Yh-yTh"/>
+                        <outlet property="registerButton" destination="Xyp-Qm-jfQ" id="9dV-gW-EaU"/>
+                        <outlet property="signInButton" destination="6Tj-RW-f0R" id="KUW-HU-wFS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="382.5" y="700.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Trakt Logo" width="92" height="101"/>
+    </resources>
 </document>
