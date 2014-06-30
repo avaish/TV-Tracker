@@ -146,13 +146,13 @@
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
+                                    <rect key="frame" x="110" y="87" width="100" height="100"/>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <mask key="constraints">
                                         <include reference="0J7-EQ-a63"/>
                                         <include reference="8E6-b1-bpr"/>
                                     </mask>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="110" y="87" width="100" height="100"/>
                                 </variation>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="9zz-du-BjX">
@@ -187,9 +187,7 @@
                             <constraint firstItem="hOa-md-XDt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="K98-zm-TJY"/>
                             <constraint firstItem="9zz-du-BjX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="Obd-5y-fnT"/>
                             <constraint firstItem="9zz-du-BjX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6u8-gH-sea" secondAttribute="trailing" priority="999" constant="18" id="PBw-Ri-bey"/>
-                            <constraint firstAttribute="centerY" secondItem="9zz-du-BjX" secondAttribute="centerY" priority="999" constant="0.25" id="PQb-36-Zyt">
-                                <variation key="heightClass=compact-widthClass=compact"/>
-                            </constraint>
+                            <constraint firstAttribute="centerY" secondItem="9zz-du-BjX" secondAttribute="centerY" priority="999" constant="0.25" id="PQb-36-Zyt"/>
                             <constraint firstAttribute="trailing" secondItem="9zz-du-BjX" secondAttribute="trailing" constant="23" id="QMB-5M-LFa"/>
                             <constraint firstItem="hOa-md-XDt" firstAttribute="leading" secondItem="6u8-gH-sea" secondAttribute="leading" priority="999" id="dB7-ln-2z9"/>
                             <constraint firstItem="6u8-gH-sea" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="igj-re-fnG"/>
@@ -207,21 +205,21 @@
                                 <exclude reference="9zz-du-BjX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7ZC-1f-vRT"/>
-                                <exclude reference="84R-hw-tg1"/>
-                                <exclude reference="igj-re-fnG"/>
                                 <exclude reference="Obd-5y-fnT"/>
                                 <exclude reference="PBw-Ri-bey"/>
                                 <exclude reference="PQb-36-Zyt"/>
                                 <exclude reference="QMB-5M-LFa"/>
                                 <exclude reference="zMa-Df-bgB"/>
-                                <exclude reference="K98-zm-TJY"/>
-                                <exclude reference="dB7-ln-2z9"/>
                                 <exclude reference="E5q-sn-aoL"/>
                                 <exclude reference="sef-ri-79e"/>
                                 <exclude reference="uze-Y4-vgv"/>
+                                <exclude reference="K98-zm-TJY"/>
+                                <exclude reference="dB7-ln-2z9"/>
                                 <exclude reference="1nm-Bf-4yo"/>
                                 <exclude reference="DSH-Dz-LK7"/>
+                                <exclude reference="7ZC-1f-vRT"/>
+                                <exclude reference="84R-hw-tg1"/>
+                                <exclude reference="igj-re-fnG"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -232,20 +230,20 @@
                                 <include reference="9zz-du-BjX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="K98-zm-TJY"/>
                                 <include reference="E5q-sn-aoL"/>
                                 <include reference="sef-ri-79e"/>
+                                <include reference="K98-zm-TJY"/>
                                 <include reference="1nm-Bf-4yo"/>
                                 <include reference="DSH-Dz-LK7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="7ZC-1f-vRT"/>
                                 <include reference="PBw-Ri-bey"/>
                                 <include reference="PQb-36-Zyt"/>
                                 <include reference="zMa-Df-bgB"/>
                                 <include reference="dB7-ln-2z9"/>
+                                <include reference="7ZC-1f-vRT"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -253,11 +251,11 @@
                                 <include reference="FH2-Sg-LaF"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="84R-hw-tg1"/>
-                                <include reference="igj-re-fnG"/>
                                 <include reference="Obd-5y-fnT"/>
                                 <include reference="QMB-5M-LFa"/>
                                 <include reference="uze-Y4-vgv"/>
+                                <include reference="84R-hw-tg1"/>
+                                <include reference="igj-re-fnG"/>
                             </mask>
                         </variation>
                         <connections>

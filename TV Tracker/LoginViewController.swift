@@ -125,10 +125,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func prepareSignIn(sender: UIButton) {
-        
         backButton.frame = CGRect(x: signInButton.frame.minX, y: signInButton.frame.minY, width: 0, height: 0)
+        backButton.addTarget(self, action: "rollbackSignIn:", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.sizeToFit()
-        view.addSubview(backButton)
+        
+        if backButton.hidden {
+            backButton.hidden = false
+        } else {
+            view.addSubview(backButton)
+        }
         
         UIView.animateWithDuration(0.5, animations: {
             self.registerButton.alpha = 0
@@ -142,16 +147,46 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         usernameField.frame = CGRect(x: self.logo.frame.maxX + 10, y: self.logo.frame.minY + 25, width: 195, height: 30)
         passwordField.frame = CGRect(x: self.logo.frame.maxX + 10, y: self.logo.frame.minY + 65, width: 195, height: 30)
         
-        self.view.addSubview(usernameField)
-        self.view.addSubview(passwordField)
+        if usernameField.hidden {
+            usernameField.hidden = false
+            passwordField.hidden = false
+        } else {
+            self.view.addSubview(usernameField)
+            self.view.addSubview(passwordField)
+        }
         
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.usernameField.alpha = 100
             self.passwordField.alpha = 100
             self.backButton.alpha = 100
             
             self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
         }, completion: nil)
+        
+        usernameField.becomeFirstResponder()
+    }
+    
+    func rollbackSignIn(sender: UIButton) {
+        UIView.animateWithDuration(0.5, animations: {
+            self.usernameField.alpha = 0
+            self.passwordField.alpha = 0
+            self.backButton.alpha = 0
+        }, completion: {
+            if $0 {
+                self.usernameField.hidden = true
+                self.passwordField.hidden = true
+                self.backButton.hidden = true
+                
+                self.registerButton.hidden = false
+            }
+        })
+        UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            self.registerButton.alpha = 100
+            self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
+            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
+        }, completion: nil)
+        
+        view.endEditing(false)
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
