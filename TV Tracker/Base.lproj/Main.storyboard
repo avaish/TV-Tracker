@@ -43,6 +43,12 @@
                         <variation key="heightClass=regular" ambiguous="YES">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
                         </variation>
+                        <variation key="widthClass=compact" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        </variation>
                         <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                         </variation>
@@ -101,130 +107,169 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tj-RW-f0R">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Sign In">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="prepareSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTc-h2-zG3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyp-Qm-jfQ">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="AbJ-Ap-MEe">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="Wgy-yP-Ecw"/>
-                                </constraints>
-                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Wgy-yP-Ecw"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Wgy-yP-Ecw"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FH2-Sg-LaF">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trakt Logo" translatesAutoresizingMaskIntoConstraints="NO" id="w8A-Y4-ZFW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOa-md-XDt">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="prepareSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NN0-rq-SEE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueB-0k-LBd">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trakt Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6u8-gH-sea">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="KWe-6h-Eoa"/>
-                                    <constraint firstAttribute="width" constant="92" id="Qr1-ba-oor">
+                                    <constraint firstAttribute="width" constant="92" id="0J7-EQ-a63">
                                         <variation key="heightClass=regular-widthClass=compact" constant="100"/>
                                     </constraint>
+                                    <constraint firstAttribute="height" constant="100" id="8E6-b1-bpr"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="KWe-6h-Eoa"/>
-                                        <exclude reference="Qr1-ba-oor"/>
+                                        <exclude reference="0J7-EQ-a63"/>
+                                        <exclude reference="8E6-b1-bpr"/>
                                     </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="0J7-EQ-a63"/>
+                                        <include reference="8E6-b1-bpr"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="110" y="87" width="100" height="100"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="9zz-du-BjX">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="vRO-h8-euJ"/>
+                                </constraints>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vRO-h8-euJ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="24" y="279" width="273" height="69"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="KWe-6h-Eoa"/>
-                                        <include reference="Qr1-ba-oor"/>
+                                        <include reference="vRO-h8-euJ"/>
                                     </mask>
                                 </variation>
-                            </imageView>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.98775050951086951" green="0.97492984771235502" blue="0.96474345446840748" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="AbJ-Ap-MEe" secondAttribute="trailing" constant="23" id="7Ca-bk-GDc"/>
-                            <constraint firstItem="w8A-Y4-ZFW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DRf-wr-FgV"/>
-                            <constraint firstAttribute="trailing" secondItem="Xyp-Qm-jfQ" secondAttribute="trailing" constant="20" symbolic="YES" id="GRo-GC-cXS"/>
-                            <constraint firstItem="w8A-Y4-ZFW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="U5Z-ke-W9C"/>
-                            <constraint firstAttribute="bottom" secondItem="6Tj-RW-f0R" secondAttribute="bottom" constant="20" symbolic="YES" id="WSe-aX-7hr"/>
-                            <constraint firstItem="6Tj-RW-f0R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="dzA-rB-1KM"/>
-                            <constraint firstItem="Xyp-Qm-jfQ" firstAttribute="baseline" secondItem="6Tj-RW-f0R" secondAttribute="baseline" id="iXz-YV-eYI"/>
-                            <constraint firstItem="AbJ-Ap-MEe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="tnz-YS-3la"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AbJ-Ap-MEe" secondAttribute="bottom" constant="91" id="yJG-Px-6O7"/>
+                            <constraint firstItem="ueB-0k-LBd" firstAttribute="baseline" secondItem="hOa-md-XDt" secondAttribute="baseline" id="1nm-Bf-4yo"/>
+                            <constraint firstAttribute="centerY" secondItem="6u8-gH-sea" secondAttribute="centerY" priority="999" id="7ZC-1f-vRT"/>
+                            <constraint firstAttribute="centerX" secondItem="6u8-gH-sea" secondAttribute="centerX" id="84R-hw-tg1"/>
+                            <constraint firstAttribute="trailing" secondItem="ueB-0k-LBd" secondAttribute="trailing" constant="20" id="DSH-Dz-LK7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hOa-md-XDt" secondAttribute="bottom" constant="20" id="E5q-sn-aoL"/>
+                            <constraint firstItem="hOa-md-XDt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="K98-zm-TJY"/>
+                            <constraint firstItem="9zz-du-BjX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="Obd-5y-fnT"/>
+                            <constraint firstItem="9zz-du-BjX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6u8-gH-sea" secondAttribute="trailing" priority="999" constant="18" id="PBw-Ri-bey"/>
+                            <constraint firstAttribute="centerY" secondItem="9zz-du-BjX" secondAttribute="centerY" priority="999" constant="0.25" id="PQb-36-Zyt">
+                                <variation key="heightClass=compact-widthClass=compact"/>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="9zz-du-BjX" secondAttribute="trailing" constant="23" id="QMB-5M-LFa"/>
+                            <constraint firstItem="hOa-md-XDt" firstAttribute="leading" secondItem="6u8-gH-sea" secondAttribute="leading" priority="999" id="dB7-ln-2z9"/>
+                            <constraint firstItem="6u8-gH-sea" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="igj-re-fnG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ueB-0k-LBd" secondAttribute="bottom" constant="20" id="sef-ri-79e"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9zz-du-BjX" secondAttribute="bottom" constant="91" id="uze-Y4-vgv"/>
+                            <constraint firstItem="9zz-du-BjX" firstAttribute="trailing" secondItem="ueB-0k-LBd" secondAttribute="trailing" priority="999" id="zMa-Df-bgB"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="6Tj-RW-f0R"/>
-                                <exclude reference="Xyp-Qm-jfQ"/>
-                                <exclude reference="AbJ-Ap-MEe"/>
                                 <exclude reference="FH2-Sg-LaF"/>
-                                <exclude reference="w8A-Y4-ZFW"/>
+                                <exclude reference="hOa-md-XDt"/>
+                                <exclude reference="ueB-0k-LBd"/>
+                                <exclude reference="6u8-gH-sea"/>
+                                <exclude reference="9zz-du-BjX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7Ca-bk-GDc"/>
-                                <exclude reference="tnz-YS-3la"/>
-                                <exclude reference="yJG-Px-6O7"/>
-                                <exclude reference="WSe-aX-7hr"/>
-                                <exclude reference="dzA-rB-1KM"/>
-                                <exclude reference="GRo-GC-cXS"/>
-                                <exclude reference="iXz-YV-eYI"/>
-                                <exclude reference="DRf-wr-FgV"/>
-                                <exclude reference="U5Z-ke-W9C"/>
+                                <exclude reference="7ZC-1f-vRT"/>
+                                <exclude reference="84R-hw-tg1"/>
+                                <exclude reference="igj-re-fnG"/>
+                                <exclude reference="Obd-5y-fnT"/>
+                                <exclude reference="PBw-Ri-bey"/>
+                                <exclude reference="PQb-36-Zyt"/>
+                                <exclude reference="QMB-5M-LFa"/>
+                                <exclude reference="zMa-Df-bgB"/>
+                                <exclude reference="K98-zm-TJY"/>
+                                <exclude reference="dB7-ln-2z9"/>
+                                <exclude reference="E5q-sn-aoL"/>
+                                <exclude reference="sef-ri-79e"/>
+                                <exclude reference="uze-Y4-vgv"/>
+                                <exclude reference="1nm-Bf-4yo"/>
+                                <exclude reference="DSH-Dz-LK7"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="hOa-md-XDt"/>
+                                <include reference="ueB-0k-LBd"/>
+                                <include reference="6u8-gH-sea"/>
+                                <include reference="9zz-du-BjX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="K98-zm-TJY"/>
+                                <include reference="E5q-sn-aoL"/>
+                                <include reference="sef-ri-79e"/>
+                                <include reference="1nm-Bf-4yo"/>
+                                <include reference="DSH-Dz-LK7"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="7ZC-1f-vRT"/>
+                                <include reference="PBw-Ri-bey"/>
+                                <include reference="PQb-36-Zyt"/>
+                                <include reference="zMa-Df-bgB"/>
+                                <include reference="dB7-ln-2z9"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="6Tj-RW-f0R"/>
-                                <include reference="Xyp-Qm-jfQ"/>
-                                <include reference="AbJ-Ap-MEe"/>
                                 <include reference="FH2-Sg-LaF"/>
-                                <include reference="w8A-Y4-ZFW"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7Ca-bk-GDc"/>
-                                <include reference="tnz-YS-3la"/>
-                                <include reference="yJG-Px-6O7"/>
-                                <include reference="WSe-aX-7hr"/>
-                                <include reference="dzA-rB-1KM"/>
-                                <include reference="GRo-GC-cXS"/>
-                                <include reference="iXz-YV-eYI"/>
-                                <include reference="DRf-wr-FgV"/>
-                                <include reference="U5Z-ke-W9C"/>
+                                <include reference="84R-hw-tg1"/>
+                                <include reference="igj-re-fnG"/>
+                                <include reference="Obd-5y-fnT"/>
+                                <include reference="QMB-5M-LFa"/>
+                                <include reference="uze-Y4-vgv"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="endEditing:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cow-iR-k2s"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Connect Trakt Account" id="Hz2-sh-RFM"/>
                     <connections>
-                        <outlet property="infoLabel" destination="AbJ-Ap-MEe" id="8Yj-Qu-ukY"/>
-                        <outlet property="logo" destination="w8A-Y4-ZFW" id="3eQ-Yh-yTh"/>
-                        <outlet property="registerButton" destination="Xyp-Qm-jfQ" id="9dV-gW-EaU"/>
-                        <outlet property="signInButton" destination="6Tj-RW-f0R" id="KUW-HU-wFS"/>
+                        <outlet property="infoLabel" destination="9zz-du-BjX" id="eST-q8-6AZ"/>
+                        <outlet property="logo" destination="6u8-gH-sea" id="wi3-Gp-Rgh"/>
+                        <outlet property="registerButton" destination="ueB-0k-LBd" id="Taz-HJ-QCW"/>
+                        <outlet property="signInButton" destination="hOa-md-XDt" id="9bC-cZ-9Fw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

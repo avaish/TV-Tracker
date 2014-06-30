@@ -75,10 +75,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeShown:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
-        
-        var tapper = UITapGestureRecognizer(target: self, action: "endEditing:")
-        tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,9 +82,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func endEditing(sender: UITapGestureRecognizer) {
-        self.usernameField.resignFirstResponder()
-        self.passwordField.resignFirstResponder()
+    @IBAction func endEditing(sender: UIView) {
+        self.view.endEditing(false)
     }
     
     func keyboardWillBeShown(notification: NSNotification) {
