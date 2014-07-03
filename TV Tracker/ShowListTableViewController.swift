@@ -21,16 +21,16 @@ class ShowListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.navigationController.tabBarController.performSegueWithIdentifier("Login", sender: self)
+        })
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.navigationController.tabBarController.performSegueWithIdentifier("Login", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
