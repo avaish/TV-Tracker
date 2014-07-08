@@ -43,6 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    func application(application: UIApplication!, supportedInterfaceOrientationsForWindow window: UIWindow!) -> Int {
+        if let myWindow = window {
+            if myWindow.traitCollection.userInterfaceIdiom == .Phone {
+                return UIInterfaceOrientationMask.AllButUpsideDown.value.asSigned()
+            }
+        }
+        return UIInterfaceOrientationMask.All.value.asSigned()
+    }
 
     func saveContext () {
         var error: NSError? = nil

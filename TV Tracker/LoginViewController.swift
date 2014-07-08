@@ -75,7 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
@@ -124,7 +124,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func keyboardWillBeShown(notification: NSNotification) {
+    func keyboardWasShown(notification: NSNotification) {
         if notification.userInfo {
             let screenRect = (notification.userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
             let windowRect = self.view.window.convertRect(screenRect, fromWindow: nil)
@@ -202,9 +202,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         UIView.animateWithDuration(0.5, animations: {
             self.registerButton.alpha = 0
         }, completion: {
-                if $0 {
-                    self.registerButton.hidden = true
-                }
+            if $0 {
+                self.registerButton.hidden = true
+            }
         })
         
         if traitCollection.verticalSizeClass == .Regular {
