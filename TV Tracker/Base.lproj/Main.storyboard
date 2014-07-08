@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dfK-dt-T8q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dfK-dt-T8q">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -23,7 +23,7 @@
             </objects>
             <point key="canvasLocation" x="-1210.5" y="132"/>
         </scene>
-        <!--Show List Table View Controller - Root View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="cQe-FA-gqc">
             <objects>
                 <tableViewController id="Ses-a3-WVe" customClass="ShowListTableViewController" customModule="TV_Tracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowCell" id="cdS-xT-TMQ">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -66,7 +65,7 @@
             </objects>
             <point key="canvasLocation" x="382.5" y="132"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Item-->
         <scene sceneID="YZH-Zr-JkE">
             <objects>
                 <navigationController id="KJK-xH-Vyp" sceneMemberID="viewController">
@@ -99,7 +98,7 @@
             </objects>
             <point key="canvasLocation" x="-427.5" y="700.5"/>
         </scene>
-        <!--Login View Controller - Connect Trakt Account-->
+        <!--Connect Trakt Account-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="TV_Tracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -126,36 +125,13 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Trakt Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6ha-R9-s2Q">
-                                <rect key="frame" x="194" y="77" width="92" height="101"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="3Ij-TG-6d9"/>
-                                    <constraint firstAttribute="width" constant="92" id="cWb-HC-Z4P">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3Ij-TG-6d9"/>
-                                        <exclude reference="cWb-HC-Z4P"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <mask key="constraints">
-                                        <include reference="3Ij-TG-6d9"/>
-                                        <include reference="cWb-HC-Z4P"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <rect key="frame" x="110" y="87" width="100" height="100"/>
-                                </variation>
-                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="170" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-8z-xs7">
                                 <rect key="frame" x="20" y="359" width="440" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="4Qq-gN-t5e"/>
                                     <constraint firstAttribute="height" constant="61" id="5e9-jt-ckU"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -172,8 +148,6 @@
                                 <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="24" y="279" width="273" height="69"/>
                                 </variation>
-                                <variation key="heightClass=compact-widthClass=compact"/>
-                                <variation key="heightClass=regular-widthClass=compact"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="5e9-jt-ckU"/>
@@ -185,6 +159,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Trakt Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6ha-R9-s2Q">
+                                <rect key="frame" x="194" y="77" width="92" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="3Ij-TG-6d9"/>
+                                    <constraint firstAttribute="width" constant="92" id="cWb-HC-Z4P">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3Ij-TG-6d9"/>
+                                        <exclude reference="cWb-HC-Z4P"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="3Ij-TG-6d9"/>
+                                        <include reference="cWb-HC-Z4P"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.98775050951086951" green="0.97492984771235502" blue="0.96474345446840748" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -203,7 +198,6 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0OA-Dq-bgF" secondAttribute="bottom" constant="20" id="tN4-il-kDi"/>
                             <constraint firstItem="6ha-R9-s2Q" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33" id="wQ5-8q-Mr7"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="FH2-Sg-LaF"/>

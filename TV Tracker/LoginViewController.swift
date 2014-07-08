@@ -89,8 +89,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection!, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator!) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        
         if formState {
-            self.view.endEditing(false)
             if traitCollection.verticalSizeClass == .Regular {
                 if newCollection.verticalSizeClass == .Compact {
                     coordinator.animateAlongsideTransition({context in
