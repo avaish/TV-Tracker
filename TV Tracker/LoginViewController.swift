@@ -62,6 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var keyboardOffset: CGFloat = 0
     var centerOffset: CGFloat = 0
     var formState = false
+    var rotating = false
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -90,6 +91,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection!, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator!) {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        rotating = true
         
         if formState {
             if traitCollection.verticalSizeClass == .Regular {
@@ -101,6 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
                         self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
                         self.backButton.frame = CGRect(x: self.signInButton.frame.minX, y: self.signInButton.frame.minY, width: 0, height: 0)
+                        self.backButton.transform = CGAffineTransformIdentity
                         self.backButton.sizeToFit()
                         self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
                         self.infoLabel.alpha = 0
@@ -109,12 +112,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             } else {
                 if newCollection.verticalSizeClass == .Regular {
                     coordinator.animateAlongsideTransition({context in
-                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, self.infoLabel.frame.minX - self.logo.frame.maxX - 18, 0)
+                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, self.infoLabel.frame.minX - self.logo.frame.maxX - 10, 0)
                         self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
                         self.usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
                         self.passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
                         self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
                         self.backButton.frame = CGRect(x: self.signInButton.frame.minX, y: self.signInButton.frame.minY, width: 0, height: 0)
+                        self.backButton.transform = CGAffineTransformIdentity
                         self.backButton.sizeToFit()
                         self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
                         self.infoLabel.alpha = 100
@@ -122,6 +126,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        
+        coordinator.animateAlongsideTransition(nil, completion: {context in
+            self.rotating = false
+        })
     }
     
     func keyboardWasShown(notification: NSNotification) {
@@ -166,10 +174,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         UIView.animateWithDuration(0.5, animations: {
             self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, 0, -movement)
             self.registerButton.transform = CGAffineTransformTranslate(self.registerButton.transform, 0, -movement)
-            self.backButton.transform = CGAffineTransformTranslate(self.backButton.transform, 0, -movement)
+            if !self.rotating {
+                self.backButton.transform = CGAffineTransformTranslate(self.backButton.transform, 0, -movement)
+            }
         }, completion: nil)
         
-        if traitCollection.verticalSizeClass == .Regular {
+        if traitCollection.verticalSizeClass == .Regular && !rotating {
             UIView.animateWithDuration(0.5, animations: {
                 if self.infoLabel.alpha == 0 {
                     self.infoLabel.alpha = 100
@@ -177,7 +187,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.infoLabel.transform = CGAffineTransformTranslate(self.infoLabel.transform, 0, -movement)
                 }
             }, completion: nil)
-        } else {
+        } else if traitCollection.verticalSizeClass == .Compact && !rotating {
+            let centerMovement = centerOffset
+            
+            UIView.animateWithDuration(0.5, animations: {
+                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 0, -centerMovement)
+                self.usernameField.transform = CGAffineTransformTranslate(self.usernameField.transform, 0, -centerMovement)
+                self.passwordField.transform = CGAffineTransformTranslate(self.passwordField.transform, 0, -centerMovement)
+            }, completion: nil)
+        } else if traitCollection.verticalSizeClass == .Regular && rotating {
             let centerMovement = centerOffset
             
             UIView.animateWithDuration(0.5, animations: {

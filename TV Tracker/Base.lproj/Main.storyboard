@@ -45,8 +45,14 @@
                         <variation key="widthClass=compact" ambiguous="YES">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         </variation>
+                        <variation key="widthClass=regular" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                        </variation>
                         <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="320"/>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
@@ -125,7 +131,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-8z-xs7">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-8z-xs7">
                                 <rect key="frame" x="20" y="359" width="440" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="4Qq-gN-t5e"/>
@@ -163,7 +169,7 @@
                                 <rect key="frame" x="194" y="77" width="92" height="101"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="3Ij-TG-6d9"/>
-                                    <constraint firstAttribute="width" constant="92" id="cWb-HC-Z4P">
+                                    <constraint firstAttribute="width" constant="100" id="cWb-HC-Z4P">
                                         <variation key="heightClass=regular-widthClass=compact" constant="100"/>
                                     </constraint>
                                 </constraints>
