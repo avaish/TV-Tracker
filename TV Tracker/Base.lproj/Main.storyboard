@@ -122,7 +122,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="prepareSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXE-cD-OJt"/>
+                                    <action selector="prepareForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VVH-bm-Cbc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeQ-kh-V76">
@@ -130,8 +130,11 @@
                                 <state key="normal" title="Register">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="prepareForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0sz-yi-46X"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-8z-xs7">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="TV Tracker uses your Trakt account to sync TV show data and make it available across devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="162" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-8z-xs7">
                                 <rect key="frame" x="20" y="359" width="440" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="4Qq-gN-t5e"/>

@@ -8,8 +8,19 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+enum FormState: String, Printable {
+    case None = "No Form"
+    case SignIn = "Sign In"
+    case Register = "Register"
+    
+    var description: String {
+    get {
+        return toRaw()
+    }
+    }
+}
 
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var infoLabel: UILabel
     @IBOutlet var logo: UIImageView
     @IBOutlet var signInButton: UIButton
@@ -32,6 +43,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return usernameField
     }()
+    @lazy var emailField: UITextField = {
+        var emailField = UITextField()
+        
+        emailField.placeholder = "email address";
+        emailField.alpha = 0
+        emailField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        emailField.clearButtonMode = .WhileEditing
+        emailField.font = UIFont.systemFontOfSize(14)
+        emailField.autocapitalizationType = .None
+        emailField.autocorrectionType = .No
+        emailField.spellCheckingType = .No
+        emailField.keyboardType = .EmailAddress
+        emailField.returnKeyType = .Next
+        emailField.enablesReturnKeyAutomatically = true
+        emailField.delegate = self
+        
+        return emailField
+    }()
     @lazy var passwordField: UITextField = {
         var passwordField = UITextField()
         
@@ -44,12 +73,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordField.autocorrectionType = .No
         passwordField.spellCheckingType = .No
         passwordField.keyboardType = .Default
-        passwordField.returnKeyType = .Go
         passwordField.enablesReturnKeyAutomatically = true
         passwordField.secureTextEntry = true
         passwordField.delegate = self
         
         return passwordField
+    }()
+    @lazy var passwordConfirmField: UITextField = {
+        var passwordConfirmField = UITextField()
+        
+        passwordConfirmField.placeholder = "confirm password";
+        passwordConfirmField.alpha = 0
+        passwordConfirmField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        passwordConfirmField.clearButtonMode = .WhileEditing
+        passwordConfirmField.font = UIFont.systemFontOfSize(14)
+        passwordConfirmField.autocapitalizationType = .None
+        passwordConfirmField.autocorrectionType = .No
+        passwordConfirmField.spellCheckingType = .No
+        passwordConfirmField.keyboardType = .Default
+        passwordConfirmField.returnKeyType = .Go
+        passwordConfirmField.enablesReturnKeyAutomatically = true
+        passwordConfirmField.secureTextEntry = true
+        passwordConfirmField.delegate = self
+        
+        return passwordConfirmField
     }()
     @lazy var backButton: UIButton = {
         var backButton = UIButton.buttonWithType(.System) as UIButton
@@ -61,8 +108,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }()
     var keyboardOffset: CGFloat = 0
     var centerOffset: CGFloat = 0
-    var formState = false
+    var formState = FormState.None
     var rotating = false
+    let apiKey = (UIApplication.sharedApplication().delegate as AppDelegate).apiKey
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -89,39 +137,60 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(false)
     }
     
+    func positionFields() {
+        if formState == .SignIn {
+            usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
+            passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
+            passwordField.returnKeyType = .Go
+        } else {
+            usernameField.frame = CGRect(x: self.view.bounds.midX - 145, y: self.logo.frame.minY + 25, width: 140, height: 30)
+            passwordField.frame = CGRect(x: self.view.bounds.midX - 145, y: self.logo.frame.minY + 65, width: 140, height: 30)
+            emailField.frame = CGRect(x: self.view.bounds.midX + 5, y: self.logo.frame.minY + 25, width: 140, height: 30)
+            passwordConfirmField.frame = CGRect(x: self.view.bounds.midX + 5, y: self.logo.frame.minY + 65, width: 140, height: 30)
+            passwordField.returnKeyType = .Next
+        }
+    }
+    
+    func positionBackButton(x: CGFloat, y: CGFloat) {
+        self.backButton.frame = CGRect(x: x, y: y, width: 0, height: 0)
+        self.backButton.transform = CGAffineTransformIdentity
+        self.backButton.sizeToFit()
+    }
+    
     override func willTransitionToTraitCollection(newCollection: UITraitCollection!, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator!) {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
         rotating = true
         
-        if formState {
+        if formState != .None {
             if traitCollection.verticalSizeClass == .Regular {
                 if newCollection.verticalSizeClass == .Compact {
+                    self.infoLabel.alpha = 0
                     coordinator.animateAlongsideTransition({context in
-                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
-                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, (self.view.frame.width - 305) / 2 - self.logo.frame.minX, 0)
-                        self.usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
-                        self.passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
-                        self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
-                        self.backButton.frame = CGRect(x: self.signInButton.frame.minX, y: self.signInButton.frame.minY, width: 0, height: 0)
-                        self.backButton.transform = CGAffineTransformIdentity
-                        self.backButton.sizeToFit()
-                        self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
-                        self.infoLabel.alpha = 0
+                        if self.formState == .SignIn {
+                            self.logo.transform = CGAffineTransformTranslate(self.logo.transform, (self.view.frame.width - 305) / 2 - self.logo.frame.minX, 0)
+                            self.positionFields()
+                            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
+                            self.positionBackButton(self.signInButton.frame.minX, y: self.signInButton.frame.minY)
+                            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
+                        } else {
+                            self.positionBackButton(self.signInButton.frame.minX, y: self.signInButton.frame.minY)
+                        }
                     }, completion: nil)
                 }
             } else {
                 if newCollection.verticalSizeClass == .Regular {
                     coordinator.animateAlongsideTransition({context in
-                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, self.infoLabel.frame.minX - self.logo.frame.maxX - 10, 0)
-                        self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
-                        self.usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
-                        self.passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
-                        self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
-                        self.backButton.frame = CGRect(x: self.signInButton.frame.minX, y: self.signInButton.frame.minY, width: 0, height: 0)
-                        self.backButton.transform = CGAffineTransformIdentity
-                        self.backButton.sizeToFit()
-                        self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
-                        self.infoLabel.alpha = 100
+                        if self.formState == .SignIn {
+                            self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100 + self.infoLabel.frame.minX - self.logo.frame.maxX - 10, 0)
+                            self.positionFields()
+                            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
+                            self.positionBackButton(self.signInButton.frame.minX, y: self.signInButton.frame.minY)
+                            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
+                            self.infoLabel.alpha = 100
+                        } else {
+                            self.positionBackButton(self.signInButton.frame.minX, y: self.signInButton.frame.minY)
+                            self.infoLabel.alpha = 100
+                        }
                     }, completion: nil)
                 }
             }
@@ -161,8 +230,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 UIView.animateWithDuration(0.5, animations: {
                     self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 0, centerMovement)
-                    self.usernameField.transform = CGAffineTransformTranslate(self.usernameField.transform, 0, centerMovement)
-                    self.passwordField.transform = CGAffineTransformTranslate(self.passwordField.transform, 0, centerMovement)
+                    self.positionFields()
                 }, completion: nil)
             }
         }
@@ -187,61 +255,62 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.infoLabel.transform = CGAffineTransformTranslate(self.infoLabel.transform, 0, -movement)
                 }
             }, completion: nil)
-        } else if traitCollection.verticalSizeClass == .Compact && !rotating {
+        } else if (traitCollection.verticalSizeClass == .Compact && !rotating) || (traitCollection.verticalSizeClass == .Regular && rotating) {
             let centerMovement = centerOffset
             
             UIView.animateWithDuration(0.5, animations: {
                 self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 0, -centerMovement)
-                self.usernameField.transform = CGAffineTransformTranslate(self.usernameField.transform, 0, -centerMovement)
-                self.passwordField.transform = CGAffineTransformTranslate(self.passwordField.transform, 0, -centerMovement)
-            }, completion: nil)
-        } else if traitCollection.verticalSizeClass == .Regular && rotating {
-            let centerMovement = centerOffset
-            
-            UIView.animateWithDuration(0.5, animations: {
-                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 0, -centerMovement)
-                self.usernameField.transform = CGAffineTransformTranslate(self.usernameField.transform, 0, -centerMovement)
-                self.passwordField.transform = CGAffineTransformTranslate(self.passwordField.transform, 0, -centerMovement)
+                self.positionFields()
             }, completion: nil)
         }
     }
     
-    @IBAction func prepareSignIn(sender: UIButton) {
-        backButton.frame = CGRect(x: signInButton.frame.minX, y: signInButton.frame.minY, width: 0, height: 0)
-        backButton.addTarget(self, action: "rollbackSignIn:", forControlEvents: .TouchUpInside)
-        backButton.sizeToFit()
+    @IBAction func prepareForm(sender: UIButton) {
+        formState = FormState.fromRaw(sender.titleLabel.text)!
         
-        if backButton.hidden {
-            backButton.hidden = false
-        } else {
-            view.addSubview(backButton)
+        positionBackButton(signInButton.frame.minX, y: signInButton.frame.minY)
+        backButton.addTarget(self, action: "rollbackForm:", forControlEvents: .TouchUpInside)
+        view.addSubview(backButton)
+        
+        let hideButton = { (button: UIButton) in
+            UIView.animateWithDuration(0.5, animations: {
+                button.alpha = 0
+            }, completion: {
+                if $0 {
+                    button.hidden = true
+                }
+            })
         }
         
-        UIView.animateWithDuration(0.5, animations: {
-            self.registerButton.alpha = 0
-        }, completion: {
-            if $0 {
-                self.registerButton.hidden = true
-            }
-        })
+        formState == .Register ? hideButton(signInButton) : hideButton(registerButton)
         
-        if traitCollection.verticalSizeClass == .Regular {
-            UIView.animateWithDuration(0.5, animations: {
-                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, -100, 0)
-            }, completion: nil)
-        } else {
-            UIView.animateWithDuration(0.5, animations: {
-                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, (self.view.frame.width - 305) / 2 - self.logo.frame.minX, 0)
+        if formState == .SignIn {
+            if traitCollection.verticalSizeClass == .Regular {
+                UIView.animateWithDuration(0.5, animations: {
+                    self.logo.transform = CGAffineTransformTranslate(self.logo.transform, -100, 0)
+                }, completion: nil)
+            } else {
                 self.infoLabel.alpha = 0
+                UIView.animateWithDuration(0.5, animations: {
+                    self.logo.transform = CGAffineTransformTranslate(self.logo.transform, (self.view.frame.width - 305) / 2 - self.logo.frame.minX, 0)
+                }, completion: nil)
+            }
+        } else {
+            UIView.animateWithDuration(0.5, animations: {
+                self.logo.alpha = 0
+                if self.traitCollection.verticalSizeClass == .Compact {
+                    self.infoLabel.alpha = 0
+                }
             }, completion: nil)
         }
         
-        usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
-        passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
+        positionFields()
         
-        if usernameField.hidden {
-            usernameField.hidden = false
-            passwordField.hidden = false
+        if formState == .Register {
+            self.view.addSubview(usernameField)
+            self.view.addSubview(emailField)
+            self.view.addSubview(passwordField)
+            self.view.addSubview(passwordConfirmField)
         } else {
             self.view.addSubview(usernameField)
             self.view.addSubview(passwordField)
@@ -252,71 +321,131 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.passwordField.alpha = 100
             self.backButton.alpha = 100
             
-            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
+            if self.formState == .Register {
+                self.emailField.alpha = 100
+                self.passwordConfirmField.alpha = 100
+            } else {
+                self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.registerButton.frame.maxX - self.signInButton.frame.maxX, 0)
+            }
         }, completion: nil)
+        
+        if formState == .SignIn {
+            signInButton.removeTarget(self, action: "prepareForm:", forControlEvents: .TouchUpInside)
+            signInButton.addTarget(self, action: "signIn:", forControlEvents: .TouchUpInside)
+        } else {
+            registerButton.removeTarget(self, action: "prepareForm:", forControlEvents: .TouchUpInside)
+            registerButton.addTarget(self, action: "register:", forControlEvents: .TouchUpInside)
+        }
         
         usernameField.becomeFirstResponder()
-        signInButton.removeTarget(self, action: "prepareSignIn:", forControlEvents: .TouchUpInside)
-        signInButton.addTarget(self, action: "checkSignIn:", forControlEvents: .TouchUpInside)
-        formState = true
     }
     
-    func rollbackSignIn(sender: UIButton) {
-        backButton.removeTarget(self, action: "rollbackSignIn:", forControlEvents: .TouchUpInside)
-        UIView.animateWithDuration(0.5, animations: {
-            self.usernameField.alpha = 0
-            self.passwordField.alpha = 0
-            self.backButton.alpha = 0
-        }, completion: {
-            if $0 {
-                self.usernameField.hidden = true
-                self.passwordField.hidden = true
-                self.backButton.hidden = true
-                
-                self.registerButton.hidden = false
-            }
-        })
-        UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseInOut, animations: {
-            self.registerButton.alpha = 100
-            self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
-        }, completion: nil)
+    func rollbackForm(sender: UIButton) {
+        backButton.removeTarget(self, action: "rollbackForm:", forControlEvents: .TouchUpInside)
+        usernameField.alpha = 0
+        passwordField.alpha = 0
+        emailField.alpha = 0
+        passwordConfirmField.alpha = 0
+        backButton.alpha = 0
         
-        if traitCollection.verticalSizeClass == .Regular {
+        usernameField.removeFromSuperview()
+        passwordField.removeFromSuperview()
+        emailField.removeFromSuperview()
+        passwordConfirmField.removeFromSuperview()
+        backButton.removeFromSuperview()
+        
+        view.endEditing(false)
+        
+        let showButton = { (button: UIButton) in
             UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseInOut, animations: {
-                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
-            }, completion: nil)
-        } else {
-            UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseInOut, animations: {
-                self.infoLabel.alpha = 100
-                self.logo.transform = CGAffineTransformTranslate(self.logo.transform, self.infoLabel.frame.minX - self.logo.frame.maxX - 18, 0)
+                button.hidden = false
+                button.alpha = 100
             }, completion: nil)
         }
         
-        view.endEditing(false)
-        signInButton.removeTarget(self, action: "checkSignIn:", forControlEvents: .TouchUpInside)
-        signInButton.addTarget(self, action: "prepareSignIn:", forControlEvents: .TouchUpInside)
-        formState = false
+        formState == .Register ? showButton(signInButton) : showButton(registerButton)
+        
+        UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseInOut, animations: {
+            if self.formState == .SignIn {
+                self.signInButton.transform = CGAffineTransformTranslate(self.signInButton.transform, self.backButton.frame.minX - self.signInButton.frame.minX, 0)
+            }
+        }, completion: nil)
+        
+        if formState == .SignIn {
+            if traitCollection.verticalSizeClass == .Regular {
+                UIView.animateWithDuration(0.5, animations: {
+                    self.logo.transform = CGAffineTransformTranslate(self.logo.transform, 100, 0)
+                    }, completion: nil)
+            } else {
+                UIView.animateWithDuration(0.5, animations: {
+                    self.logo.transform = CGAffineTransformTranslate(self.logo.transform, self.infoLabel.frame.minX - self.logo.frame.maxX - 18, 0)
+                    }, completion: nil)
+                UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseInOut, animations: {
+                    self.infoLabel.alpha = 100
+                    }, completion: nil)
+            }
+        } else {
+            UIView.animateWithDuration(0.5, animations: {
+                self.logo.alpha = 100
+                self.infoLabel.alpha = 100
+            }, completion: nil)
+        }
+        
+        if formState == .SignIn {
+            signInButton.removeTarget(self, action: "signIn:", forControlEvents: .TouchUpInside)
+            signInButton.addTarget(self, action: "prepareForm:", forControlEvents: .TouchUpInside)
+        } else {
+            registerButton.removeTarget(self, action: "register:", forControlEvents: .TouchUpInside)
+            registerButton.addTarget(self, action: "prepareForm:", forControlEvents: .TouchUpInside)
+        }
+        
+        formState = .None
     }
     
-    func checkSignIn(sender: UIButton) {
+    func signIn(sender: UIButton) {
+        view.endEditing(false)
+        let signInData = ["username": usernameField.text,
+                          "password": passwordField.text.sha1()]
         
+        let url = NSURL(string: apiKey, relativeToURL: NSURL(string: "http://api.trakt.tv/account/test/"))
+        var request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        
+        var err: AutoreleasingUnsafePointer<NSError?> = nil
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(signInData, options: nil, error: err)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
+            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+        })
+        task.resume()
+    }
+    
+    func register(sender: UIButton) {
+        view.endEditing(false)
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        if textField == self.usernameField {
-            self.passwordField.becomeFirstResponder()
+        if textField == usernameField {
+            if formState == .Register {
+                emailField.becomeFirstResponder()
+            } else {
+                passwordField.becomeFirstResponder()
+            }
+        } else if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            if formState == .Register {
+                passwordConfirmField.becomeFirstResponder()
+            } else {
+                signIn(signInButton)
+            }
+        } else if textField == passwordConfirmField {
+            register(registerButton)
         }
         return true
     }
-
-    /*
-    // #pragma mark - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

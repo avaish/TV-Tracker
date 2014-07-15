@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0C195E031D00F65453 /* LoginViewController.swift */; };
 		45782A0F195F68A400F65453 /* ShowListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0E195F68A400F65453 /* ShowListTableViewController.swift */; };
-		45BFC62E1970A9B5006A2A37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BFC62D1970A9B5006A2A37 /* StoreKit.framework */; };
+		45AC54131974555100CBBF01 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AC54121974555100CBBF01 /* GameKit.framework */; };
+		45AC54191974CF5100CBBF01 /* StringSHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC54181974CF5100CBBF01 /* StringSHA1.swift */; };
+		45BFC63019724BD1006A2A37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BFC62F19724BD1006A2A37 /* StoreKit.framework */; };
 		45E0DC48195DED80008DBAF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC47195DED80008DBAF7 /* AppDelegate.swift */; };
 		45E0DC4B195DED80008DBAF7 /* TV_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45E0DC49195DED80008DBAF7 /* TV_Tracker.xcdatamodeld */; };
 		45E0DC50195DED80008DBAF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E0DC4E195DED80008DBAF7 /* Main.storyboard */; };
@@ -44,8 +46,11 @@
 /* Begin PBXFileReference section */
 		45782A0C195E031D00F65453 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45782A0E195F68A400F65453 /* ShowListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowListTableViewController.swift; sourceTree = "<group>"; };
+		45AC54121974555100CBBF01 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		45AC54141974CF1700CBBF01 /* TV Tracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TV Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		45AC54181974CF5100CBBF01 /* StringSHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringSHA1.swift; sourceTree = "<group>"; };
 		45BFC62C1970A99C006A2A37 /* TV Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "TV Tracker.entitlements"; sourceTree = "<group>"; };
-		45BFC62D1970A9B5006A2A37 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		45BFC62F19724BD1006A2A37 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		45E0DC42195DED80008DBAF7 /* TV Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E0DC46195DED80008DBAF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E0DC47195DED80008DBAF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45BFC62E1970A9B5006A2A37 /* StoreKit.framework in Frameworks */,
+				45BFC63019724BD1006A2A37 /* StoreKit.framework in Frameworks */,
+				45AC54131974555100CBBF01 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,10 +82,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45AC541A1974D3B100CBBF01 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				45782A0C195E031D00F65453 /* LoginViewController.swift */,
+				45782A0E195F68A400F65453 /* ShowListTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		45AC541B1974D3BB00CBBF01 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				45AC54181974CF5100CBBF01 /* StringSHA1.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		45E0DC39195DED80008DBAF7 = {
 			isa = PBXGroup;
 			children = (
-				45BFC62D1970A9B5006A2A37 /* StoreKit.framework */,
+				45AC54121974555100CBBF01 /* GameKit.framework */,
+				45BFC62F19724BD1006A2A37 /* StoreKit.framework */,
 				45E0DC44195DED80008DBAF7 /* TV Tracker */,
 				45E0DC5A195DED80008DBAF7 /* TV TrackerTests */,
 				45E0DC43195DED80008DBAF7 /* Products */,
@@ -98,14 +122,15 @@
 		45E0DC44195DED80008DBAF7 /* TV Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				45BFC62C1970A99C006A2A37 /* TV Tracker.entitlements */,
 				45E0DC47195DED80008DBAF7 /* AppDelegate.swift */,
-				45782A0C195E031D00F65453 /* LoginViewController.swift */,
-				45E0DC4E195DED80008DBAF7 /* Main.storyboard */,
-				45782A0E195F68A400F65453 /* ShowListTableViewController.swift */,
-				45E0DC51195DED80008DBAF7 /* Images.xcassets */,
 				45E0DC49195DED80008DBAF7 /* TV_Tracker.xcdatamodeld */,
+				45BFC62C1970A99C006A2A37 /* TV Tracker.entitlements */,
+				45AC541B1974D3BB00CBBF01 /* Utilities */,
+				45AC541A1974D3B100CBBF01 /* View Controllers */,
+				45E0DC4E195DED80008DBAF7 /* Main.storyboard */,
+				45E0DC51195DED80008DBAF7 /* Images.xcassets */,
 				45E0DC45195DED80008DBAF7 /* Supporting Files */,
+				45AC54141974CF1700CBBF01 /* TV Tracker-Bridging-Header.h */,
 			);
 			path = "TV Tracker";
 			sourceTree = "<group>";
@@ -191,6 +216,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
@@ -249,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45782A0F195F68A400F65453 /* ShowListTableViewController.swift in Sources */,
+				45AC54191974CF5100CBBF01 /* StringSHA1.swift in Sources */,
 				45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */,
 				45E0DC4B195DED80008DBAF7 /* TV_Tracker.xcdatamodeld in Sources */,
 				45E0DC48195DED80008DBAF7 /* AppDelegate.swift in Sources */,
@@ -379,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TV Tracker/TV Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -386,6 +416,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TV Tracker/TV Tracker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -394,6 +426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "TV Tracker/TV Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -401,6 +434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TV Tracker/TV Tracker-Bridging-Header.h";
 			};
 			name = Release;
 		};

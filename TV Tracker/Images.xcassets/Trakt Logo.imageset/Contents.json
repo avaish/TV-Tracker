@@ -1,8 +1,12 @@
 {
   "images" : [
     {
+      "idiom" : "universal"
+    },
+    {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "logo.png"
     },
     {
       "idiom" : "universal",
