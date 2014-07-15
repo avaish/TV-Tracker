@@ -22,9 +22,14 @@ class ShowListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.navigationController.tabBarController.performSegueWithIdentifier("Login", sender: self)
-        })
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if !defaults.objectForKey("username") {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.navigationController.tabBarController.performSegueWithIdentifier("Login", sender: self)
+            })
+        } else {
+            println(defaults.objectForKey("username"))
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

@@ -406,6 +406,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(false)
         let signInData = ["username": usernameField.text,
                           "password": passwordField.text.sha1()]
+        let defaults = NSUserDefaults.standardUserDefaults()
         
         let url = NSURL(string: apiKey, relativeToURL: NSURL(string: "http://api.trakt.tv/account/test/"))
         var request = NSMutableURLRequest(URL: url)
@@ -418,13 +419,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
-            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+            if err {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.createErrorLabelWithMessage("Could not reach Trakt.")
+                })
+            } else {
+                var response = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: err) as Dictionary<String, String>
+                if response["status"] == "failure" {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.createErrorLabelWithMessage("Incorrect username / password.")
+                    })
+                } else if response["status"] == "success" {
+                    //defaults.setObject(signInData["username"], forKey: "username")
+                    //defaults.setObject(signInData["password"], forKey: "password")
+                    //defaults.synchronize()
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                }
+            }
         })
         task.resume()
     }
     
     func register(sender: UIButton) {
         view.endEditing(false)
+    }
+    
+    func createErrorLabelWithMessage(message: String) {
+        
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
