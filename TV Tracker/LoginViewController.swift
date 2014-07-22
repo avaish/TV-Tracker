@@ -20,12 +20,13 @@ enum FormState: String, Printable {
     }
 }
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet var infoLabel: UILabel
-    @IBOutlet var logo: UIImageView
-    @IBOutlet var signInButton: UIButton
-    @IBOutlet var registerButton: UIButton
-    @lazy var usernameField: UITextField = {
+class LoginViewController: UIViewController, UITextFieldDelegate, NSURLSessionDataDelegate {
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var logo: UIImageView!
+    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var registerButton: UIButton!
+    @IBOutlet var navTitle: UINavigationItem!
+    lazy var usernameField: UITextField = {
         var usernameField = UITextField()
         
         usernameField.placeholder = "username";
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return usernameField
     }()
-    @lazy var emailField: UITextField = {
+    lazy var emailField: UITextField = {
         var emailField = UITextField()
         
         emailField.placeholder = "email address";
@@ -61,7 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return emailField
     }()
-    @lazy var passwordField: UITextField = {
+    lazy var passwordField: UITextField = {
         var passwordField = UITextField()
         
         passwordField.placeholder = "password";
@@ -79,7 +80,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return passwordField
     }()
-    @lazy var passwordConfirmField: UITextField = {
+    lazy var passwordConfirmField: UITextField = {
         var passwordConfirmField = UITextField()
         
         passwordConfirmField.placeholder = "confirm password";
@@ -98,13 +99,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return passwordConfirmField
     }()
-    @lazy var backButton: UIButton = {
+    lazy var backButton: UIButton = {
         var backButton = UIButton.buttonWithType(.System) as UIButton
         
         backButton.setTitle("Back", forState: .Normal)
         backButton.alpha = 0
         
         return backButton
+    }()
+    lazy var errorLabel: UILabel = {
+        var errorLabel = UILabel()
+        
+        errorLabel.textColor = UIColor.redColor()
+        errorLabel.textAlignment = .Center
+        errorLabel.alpha = 0
+        
+        return errorLabel
     }()
     var keyboardOffset: CGFloat = 0
     var centerOffset: CGFloat = 0
@@ -139,16 +149,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func positionFields() {
         if formState == .SignIn {
-            usernameField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 25, width: 190, height: 30)
-            passwordField.frame = CGRect(x: self.logo.frame.maxX + 15, y: self.logo.frame.minY + 65, width: 190, height: 30)
+            usernameField.frame = CGRect(x: logo.frame.maxX + 15, y: logo.frame.minY + 25, width: 190, height: 30)
+            passwordField.frame = CGRect(x: logo.frame.maxX + 15, y: logo.frame.minY + 65, width: 190, height: 30)
             passwordField.returnKeyType = .Go
         } else {
-            usernameField.frame = CGRect(x: self.view.bounds.midX - 145, y: self.logo.frame.minY + 25, width: 140, height: 30)
-            passwordField.frame = CGRect(x: self.view.bounds.midX - 145, y: self.logo.frame.minY + 65, width: 140, height: 30)
-            emailField.frame = CGRect(x: self.view.bounds.midX + 5, y: self.logo.frame.minY + 25, width: 140, height: 30)
-            passwordConfirmField.frame = CGRect(x: self.view.bounds.midX + 5, y: self.logo.frame.minY + 65, width: 140, height: 30)
+            usernameField.frame = CGRect(x: view.bounds.midX - 145, y: logo.frame.minY + 25, width: 140, height: 30)
+            passwordField.frame = CGRect(x: view.bounds.midX - 145, y: logo.frame.minY + 65, width: 140, height: 30)
+            emailField.frame = CGRect(x: view.bounds.midX + 5, y: logo.frame.minY + 25, width: 140, height: 30)
+            passwordConfirmField.frame = CGRect(x: view.bounds.midX + 5, y: logo.frame.minY + 65, width: 140, height: 30)
             passwordField.returnKeyType = .Next
         }
+    }
+    
+    func createErrorLabelWithMessage(message: String) {
+        errorLabel.text = message
+        errorLabel.frame = CGRect(x: view.bounds.midX - 145, y: logo.frame.minY + 105, width: 290, height: 30)
+        view.addSubview(errorLabel)
+        UIView.animateWithDuration(0.5, animations: {
+            self.errorLabel.alpha = 100
+        })
+    }
+    
+    func removeErrorLabel() {
+        errorLabel.alpha = 0
+        errorLabel.removeFromSuperview()
     }
     
     func positionBackButton(x: CGFloat, y: CGFloat) {
@@ -162,6 +186,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         rotating = true
         
         if formState != .None {
+            removeErrorLabel()
             if traitCollection.verticalSizeClass == .Regular {
                 if newCollection.verticalSizeClass == .Compact {
                     self.infoLabel.alpha = 0
@@ -203,6 +228,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func keyboardWasShown(notification: NSNotification) {
         if notification.userInfo {
+            removeErrorLabel()
+            
             let screenRect = (notification.userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
             let windowRect = self.view.window.convertRect(screenRect, fromWindow: nil)
             let viewRect = self.view.convertRect(windowRect, fromView: nil)
@@ -353,6 +380,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailField.removeFromSuperview()
         passwordConfirmField.removeFromSuperview()
         backButton.removeFromSuperview()
+        removeErrorLabel()
         
         view.endEditing(false)
         
@@ -404,9 +432,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func signIn(sender: UIButton) {
         view.endEditing(false)
+        
         let signInData = ["username": usernameField.text,
                           "password": passwordField.text.sha1()]
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         let url = NSURL(string: apiKey, relativeToURL: NSURL(string: "http://api.trakt.tv/account/test/"))
         var request = NSMutableURLRequest(URL: url)
@@ -417,37 +445,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
-            if err {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.createErrorLabelWithMessage("Could not reach Trakt.")
-                })
-            } else {
-                var response = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: err) as Dictionary<String, String>
-                if response["status"] == "failure" {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.createErrorLabelWithMessage("Incorrect username / password.")
-                    })
-                } else if response["status"] == "success" {
-                    //defaults.setObject(signInData["username"], forKey: "username")
-                    //defaults.setObject(signInData["password"], forKey: "password")
-                    //defaults.synchronize()
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    })
-                }
-            }
-        })
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+                                        delegate: self, delegateQueue: nil)
+        let task = session.dataTaskWithRequest(request)
         task.resume()
+    }
+    
+    func URLSession(session: NSURLSession!, dataTask: NSURLSessionDataTask!, didReceiveData data: NSData!) {
+        var err: AutoreleasingUnsafePointer<NSError?> = nil
+        var response = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: err) as Dictionary<String, String>
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if response["status"] == "failure" {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.createErrorLabelWithMessage("Incorrect username / password.")
+            })
+        } else if response["status"] == "success" {
+            defaults.setObject(usernameField.text, forKey: "username")
+            defaults.setObject(passwordField.text.sha1(), forKey: "password")
+            defaults.synchronize()
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func register(sender: UIButton) {
         view.endEditing(false)
-    }
-    
-    func createErrorLabelWithMessage(message: String) {
-        
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
