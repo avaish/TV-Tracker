@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450E629B197F3EE400EF4245 /* UIImageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450E629A197F3EE400EF4245 /* UIImageColor.swift */; };
 		45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0C195E031D00F65453 /* LoginViewController.swift */; };
 		45782A0F195F68A400F65453 /* ShowListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45782A0E195F68A400F65453 /* ShowListTableViewController.swift */; };
 		45AC54131974555100CBBF01 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AC54121974555100CBBF01 /* GameKit.framework */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		450E629A197F3EE400EF4245 /* UIImageColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageColor.swift; sourceTree = "<group>"; };
 		45782A0C195E031D00F65453 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45782A0E195F68A400F65453 /* ShowListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowListTableViewController.swift; sourceTree = "<group>"; };
 		45AC54121974555100CBBF01 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				45AC54181974CF5100CBBF01 /* StringSHA1.swift */,
+				450E629A197F3EE400EF4245 /* UIImageColor.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				45AC54191974CF5100CBBF01 /* StringSHA1.swift in Sources */,
 				45782A0D195E031D00F65453 /* LoginViewController.swift in Sources */,
 				45E0DC4B195DED80008DBAF7 /* TV_Tracker.xcdatamodeld in Sources */,
+				450E629B197F3EE400EF4245 /* UIImageColor.swift in Sources */,
 				45E0DC48195DED80008DBAF7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var setVisibleCalls = 0
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        // Override point for customization after application launch.
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(),
+                                                           NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 16)], forState: .Normal)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "storeDidChange:",
+            name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: NSUbiquitousKeyValueStore.defaultStore())
+        NSUbiquitousKeyValueStore.defaultStore().synchronize()
+        
+        var rootViewController = self.window?.rootViewController
+        var splitViewController = rootViewController as UISplitViewController
+        
+        splitViewController.preferredDisplayMode = .AllVisible
+        
         return true
     }
 
@@ -62,6 +73,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = setVisibleCalls > 0
+    }
+    
+    func storeDidChange(notification: NSNotification) {
+        let reason: NSNumber = notification.userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as NSNumber
+        
+        if reason.unsignedIntegerValue == NSUbiquitousKeyValueStoreServerChange ||
+           reason.unsignedIntegerValue == NSUbiquitousKeyValueStoreInitialSyncChange {
+            let keys: NSArray = notification.userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as NSArray
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let store = NSUbiquitousKeyValueStore.defaultStore()
+            
+            for key in keys {
+                defaults.setObject(store.objectForKey(key as String), forKey: (key as String))
+            }
+            defaults.synchronize()
+        }
     }
 
     func saveContext () {

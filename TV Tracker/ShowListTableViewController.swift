@@ -25,7 +25,7 @@ class ShowListTableViewController: UITableViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
         if !defaults.objectForKey("username") {
             dispatch_async(dispatch_get_main_queue(), {
-                self.navigationController.tabBarController.performSegueWithIdentifier("Login", sender: self)
+                self.navigationController.splitViewController.performSegueWithIdentifier("Login", sender: self)
             })
         } else {
             println(defaults.objectForKey("username"))
