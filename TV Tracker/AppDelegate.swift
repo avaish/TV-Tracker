@@ -29,6 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         splitViewController.preferredDisplayMode = .AllVisible
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if !defaults.objectForKey("username") {
+            dispatch_async(dispatch_get_main_queue(), {
+                splitViewController.performSegueWithIdentifier("Login", sender: self)
+            })
+        }
+        
         return true
     }
 
@@ -59,10 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, supportedInterfaceOrientationsForWindow window: UIWindow!) -> Int {
         if let myWindow = window {
             if myWindow.traitCollection.userInterfaceIdiom == .Phone {
-                return UIInterfaceOrientationMask.AllButUpsideDown.toRaw().asSigned()
+                return Int(UIInterfaceOrientationMask.AllButUpsideDown.toRaw())
             }
         }
-        return UIInterfaceOrientationMask.All.toRaw().asSigned()
+        return Int(UIInterfaceOrientationMask.All.toRaw())
     }
     
     func setNetworkActivityIndicatorVisible(setVisable: Bool) {
@@ -110,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Returns the managed object context for the application.
     // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
     var managedObjectContext: NSManagedObjectContext {
-        if !_managedObjectContext {
+        if _managedObjectContext == nil {
             let coordinator = self.persistentStoreCoordinator
             if coordinator != nil {
                 _managedObjectContext = NSManagedObjectContext()
@@ -124,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Returns the managed object model for the application.
     // If the model doesn't already exist, it is created from the application's model.
     var managedObjectModel: NSManagedObjectModel {
-        if !_managedObjectModel {
+        if _managedObjectModel == nil {
             let modelURL = NSBundle.mainBundle().URLForResource("TV_Tracker", withExtension: "momd")
             _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
         }
@@ -135,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Returns the persistent store coordinator for the application.
     // If the coordinator doesn't already exist, it is created and the application's store added to it.
     var persistentStoreCoordinator: NSPersistentStoreCoordinator {
-        if !_persistentStoreCoordinator {
+        if _persistentStoreCoordinator == nil {
             let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TV_Tracker.sqlite")
             var error: NSError? = nil
             _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)

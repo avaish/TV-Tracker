@@ -13,7 +13,7 @@ extension String {
         let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
         let strLen = CUnsignedInt(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         let digestLen = Int(CC_SHA1_DIGEST_LENGTH)
-        let result = UnsafePointer<CUnsignedChar>.alloc(digestLen)
+        let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen)
         
         CC_SHA1(str!, strLen, result)
         
@@ -23,6 +23,6 @@ extension String {
         }
         
         result.destroy()
-        return String(hash)
+        return String(format: hash)
     }
 }

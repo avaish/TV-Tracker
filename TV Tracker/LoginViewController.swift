@@ -20,11 +20,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NSURLSessionDa
     let apiKey = (UIApplication.sharedApplication().delegate as AppDelegate).apiKey
     private var receivingData = NSMutableData()
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
@@ -76,7 +76,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NSURLSessionDa
         var request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         
-        var err: AutoreleasingUnsafePointer<NSError?> = nil
+        var err: AutoreleasingUnsafeMutablePointer<NSError?> = nil
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(signInData, options: nil, error: err)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NSURLSessionDa
         var request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         
-        var err: AutoreleasingUnsafePointer<NSError?> = nil
+        var err: AutoreleasingUnsafeMutablePointer<NSError?> = nil
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(registerData, options: nil, error: err)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -143,7 +143,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NSURLSessionDa
                 self.presentViewController(alert, animated: true, completion: nil)
             })
         } else {
-            var err: AutoreleasingUnsafePointer<NSError?> = nil
+            var err: AutoreleasingUnsafeMutablePointer<NSError?> = nil
             var response = NSJSONSerialization.JSONObjectWithData(receivedData,
                 options: nil, error: err) as Dictionary<String, String>
             
